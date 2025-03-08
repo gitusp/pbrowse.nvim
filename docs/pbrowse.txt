@@ -1,0 +1,19 @@
+*pbrowse.txt*  Github PR line selector
+
+INTRODUCTION                                   *pbrowse*
+
+`PBrowse` works as `GBrowse` but for Pull requests. This plugin allows you to
+quickly open GitHub pull request pages at specific lines or selections.
+
+REQUIREMENTS                                   *pbrowse-requirements*
+
+- `gh`: GitHub CLI tool
+- A repository connected to GitHub
+- Active pull request for the current branch
+
+COMMANDS                                       *pbrowse-commands*
+
+:PBrowse                                       *:PBrowse*
+        Browse the content of current line or visual selection.
+        `gh` is used to get information of the current branch's PR.
+        Works in normal mode for single lines or visual mode for selections.
