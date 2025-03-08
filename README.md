@@ -7,10 +7,14 @@ https://github.com/user-attachments/assets/cfb721a6-90eb-448a-bbd9-8727314fc448
 
 ## Installation
 
-Using [vim-plug](https://github.com/junegunn/vim-plug):
+For [lazy.nvim](https://github.com/folke/lazy.nvim)
 
-```vim
-Plug 'gitusp/pbrowse.nvim'
+```lua
+{
+  "gitusp/pbrowse.nvim",
+  lazy = true,
+  cmd = { "PBrowse" },
+}
 ```
 
 ## Requirements
