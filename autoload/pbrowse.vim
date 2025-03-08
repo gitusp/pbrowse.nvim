@@ -11,9 +11,24 @@ function! pbrowse#browse(line1, line2, count) abort
     return
   endif
 
-  " Get file path relative to git root
-  let l:file_path = trim(system('git ls-files --full-name ' . shellescape(expand('%:p'))))
-  
+  " Get git root directory
+  let l:git_root = trim(system('git rev-parse --show-toplevel'))
+  if v:shell_error != 0
+    echoerr "Failed to get git root directory. Make sure you're in a git repository."
+    return
+  endif
+
+  " Get full path of current file and make it relative to git root
+  let l:full_path = expand('%:p')
+  let l:git_root_path = l:git_root . '/'
+  let l:file_path = l:full_path
+  if l:full_path[0:len(l:git_root_path)-1] ==# l:git_root_path
+    let l:file_path = l:full_path[len(l:git_root_path):]
+  else
+    echoerr "Current file is not within the git repository"
+    return
+  endif
+
   " Create hash of the file path using sha256
   let l:file_hash = trim(system('echo -n "' . l:file_path . '" | shasum -a 256 | cut -d " " -f 1'))
   
