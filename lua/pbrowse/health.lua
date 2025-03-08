@@ -30,15 +30,6 @@ function M.check()
     })
   end
 
-  -- Check for hashing utility
-  if vim.fn.executable('shasum') == 1 then
-    vim.health.ok('Found shasum in path')
-  else
-    vim.health.error('shasum not found in path', {
-      'Make sure coreutils are installed on your system'
-    })
-  end
-
   -- Check for browser opening capability
   if vim.fn.has('mac') == 1 and vim.fn.executable('open') == 1 then
     vim.health.ok('Found open command for launching browser (macOS)')
