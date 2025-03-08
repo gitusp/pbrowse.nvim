@@ -31,12 +31,18 @@ function! health#pbrowse#check() abort
   endif
 
   " Check for browser opening capability
-  if executable('open')
-    call health#report_ok('Found open command for launching browser')
+  if has('mac') && executable('open')
+    call health#report_ok('Found open command for launching browser (macOS)')
+  elseif has('unix') && executable('xdg-open')
+    call health#report_ok('Found xdg-open command for launching browser (Unix/Linux)')
+  elseif (has('win32') || has('win64'))
+    call health#report_ok('Using start command for launching browser (Windows)')
   else
-    call health#report_warning('open command not found', [
-          \ 'Browser opening may not work on this system',
-          \ 'Consider installing xdg-open on Linux or equivalent'
+    call health#report_warning('Browser opening command not detected for this platform', [
+          \ 'Make sure you have appropriate browser opener available:',
+          \ '- macOS: open command',
+          \ '- Linux: xdg-open command',
+          \ '- Windows: start command'
           \ ])
   endif
 endfunction

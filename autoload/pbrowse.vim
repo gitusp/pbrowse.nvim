@@ -7,7 +7,7 @@ function! pbrowse#browse(line1, line2) abort
   endif
 
   " Get file path relative to git root
-  let l:file_path = trim(system('git rev-parse --show-prefix')) . expand('%:t')
+  let l:file_path = trim(system('git ls-files --full-name ' . shellescape(expand('%:p'))))
   
   " Create hash of the file path using sha256
   let l:file_hash = trim(system('echo -n "' . l:file_path . '" | shasum -a 256 | cut -d " " -f 1'))
@@ -22,6 +22,13 @@ function! pbrowse#browse(line1, line2) abort
     let l:url = l:url . 'R' . a:line1 . '-R' . a:line2
   endif
   
-  " Open the URL in browser
-  call system('open ' . shellescape(l:url))
+  if has('mac')
+    call system('open ' . shellescape(l:url))
+  elseif has('unix')
+    call system('xdg-open ' . shellescape(l:url))
+  elseif has('win32') || has('win64')
+    call system('start "" ' . shellescape(l:url))
+  else
+    echoerr "Unsupported platform for opening URL"
+  endif
 endfunction
