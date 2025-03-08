@@ -1,4 +1,4 @@
-function! pbrowse#browse(line1, line2) abort
+function! pbrowse#browse(line1, line2, count) abort
   " Get current PR URL using gh command
   let l:pr_url = trim(system('gh pr view --json url --jq .url'))
   if v:shell_error != 0
@@ -15,11 +15,13 @@ function! pbrowse#browse(line1, line2) abort
   " Build the URL
   let l:url = l:pr_url . '/files#diff-' . l:file_hash
   
-  " Add line information
-  if a:line1 == a:line2
-    let l:url = l:url . 'R' . a:line1
-  else
-    let l:url = l:url . 'R' . a:line1 . '-R' . a:line2
+  " Add line information only if it's a selection or a specific line
+  if a:count > 0
+    if a:line1 == a:line2
+      let l:url = l:url . 'R' . a:line1
+    else
+      let l:url = l:url . 'R' . a:line1 . '-R' . a:line2
+    endif
   endif
   
   if has('mac')
