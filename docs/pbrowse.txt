@@ -8,6 +8,7 @@ quickly open GitHub pull request pages at specific lines or selections.
 REQUIREMENTS                                   *pbrowse-requirements*
 
 - `gh`: GitHub CLI tool
+- `shasum`: For computing file hashes (built-in on macOS, available via coreutils on most Linux distros)
 - A repository connected to GitHub
 - Active pull request for the current branch
 
