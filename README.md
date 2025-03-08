@@ -15,8 +15,8 @@ Plug 'gitusp/pbrowse.nvim'
 
 ## Requirements
 
+- `git`: Git version control
 - `gh`: Git command-line tools
-- `shasum`: For computing file hashes (built-in on macOS, available via coreutils on most Linux distros)
 - A repository connected to GitHub
 - Active pull request for the current branch
 
