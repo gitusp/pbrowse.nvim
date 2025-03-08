@@ -1,7 +1,7 @@
 pbrowse.nvim
 ===
 
-`PBrowse` works as `GBrowse` but for Pull requests. This plugin allows you to quickly open GitHub pull request pages at specific lines or selections.
+`PBrowse` works as `GBrowse` (from [fugitive.vim](https://github.com/tpope/vim-fugitive)) but for Pull requests. This plugin allows you to quickly open GitHub pull request pages at specific lines or selections.
 
 ## Installation
 
