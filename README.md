@@ -21,7 +21,7 @@ Plug 'gitusp/pbrowse.vim'
 ## Usage
 
 In normal mode:
-- `:PBrowse` - Browse the current line
+- `:PBrowse` - Browse the current file
 
 In visual mode:
 - Select text and use `:PBrowse` - Browse the selected lines

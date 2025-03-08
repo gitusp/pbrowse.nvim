@@ -15,6 +15,6 @@ REQUIREMENTS                                   *pbrowse-requirements*
 COMMANDS                                       *pbrowse-commands*
 
 :PBrowse                                       *:PBrowse*
-        Browse the content of current line or visual selection.
+        Browse the content of current file or visual selection.
         `gh` is used to get information of the current branch's PR.
-        Works in normal mode for single lines or visual mode for selections.
+        Works in normal mode for current file or visual mode for selections.
