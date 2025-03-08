@@ -30,7 +30,8 @@ function! pbrowse#browse(line1, line2, count) abort
   endif
 
   " Create hash of the file path using sha256
-  let l:file_hash = trim(system('echo -n "' . l:file_path . '" | shasum -a 256 | cut -d " " -f 1'))
+  let l:file_hash = trim(system('echo -n "' . l:file_path . '" | shasum -a 256'))
+  let l:file_hash = split(l:file_hash)[0]
   
   " Build the URL
   let l:url = l:pr_url . '/files#diff-' . l:file_hash
