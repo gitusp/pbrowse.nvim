@@ -1,6 +1,6 @@
 local M = {}
 
-function M.browse(line1, line2, count)
+function M.browse(line1, line2, range)
   if vim.fn.has('win32') == 1 or vim.fn.has('win64') == 1 then
     vim.api.nvim_err_writeln("Windows is not supported. Please use WSL (Windows Subsystem for Linux) instead.")
     return
@@ -39,7 +39,7 @@ function M.browse(line1, line2, count)
   local url = pr_url .. '/files#diff-' .. file_hash
   
   -- Add line information only if it's a selection or a specific line
-  if count > 0 then
+  if range > 0 then
     if line1 == line2 then
       url = url .. 'R' .. line1
     else
