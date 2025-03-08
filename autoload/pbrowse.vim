@@ -1,4 +1,9 @@
 function! pbrowse#browse(line1, line2, count) abort
+  if has('win32') || has('win64')
+    echoerr "Windows is not supported. Please use WSL (Windows Subsystem for Linux) instead."
+    return
+  end
+
   " Get current PR URL using gh command
   let l:pr_url = trim(system('gh pr view --json url --jq .url'))
   if v:shell_error != 0
@@ -28,8 +33,6 @@ function! pbrowse#browse(line1, line2, count) abort
     call system('open ' . shellescape(l:url))
   elseif has('unix')
     call system('xdg-open ' . shellescape(l:url))
-  elseif has('win32') || has('win64')
-    call system('start "" ' . shellescape(l:url))
   else
     echoerr "Unsupported platform for opening URL"
   endif

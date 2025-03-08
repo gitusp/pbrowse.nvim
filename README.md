@@ -18,6 +18,10 @@ Plug 'gitusp/pbrowse.nvim'
 - A repository connected to GitHub
 - Active pull request for the current branch
 
+## Compatibility
+
+This plugin has only been tested on macOS. Contributions and help testing on other platforms are welcome!
+
 ## Usage
 
 In normal mode:
