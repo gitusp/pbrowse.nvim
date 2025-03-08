@@ -32,8 +32,7 @@ function M.browse(line1, line2, range)
   end
 
   -- Create hash of the file path using sha256
-  local file_hash = vim.fn.trim(vim.fn.system('echo -n "' .. file_path .. '" | shasum -a 256'))
-  file_hash = vim.fn.split(file_hash)[1]
+  local file_hash = vim.fn.sha256(file_path)
   
   -- Build the URL
   local url = pr_url .. '/files#diff-' .. file_hash
