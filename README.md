@@ -1,4 +1,4 @@
-pbrowse.vim
+pbrowse.nvim
 ===
 
 `PBrowse` works as `GBrowse` but for Pull requests. This plugin allows you to quickly open GitHub pull request pages at specific lines or selections.
@@ -8,7 +8,7 @@ pbrowse.vim
 Using [vim-plug](https://github.com/junegunn/vim-plug):
 
 ```vim
-Plug 'gitusp/pbrowse.vim'
+Plug 'gitusp/pbrowse.nvim'
 ```
 
 ## Requirements
