@@ -18,33 +18,17 @@ function M.browse(line1, line2, range)
 
   -- Get current PR URL using gh command
   local pr_url = vim.fn.trim(vim.fn.system('gh pr view --json url --jq .url'))
-  local pr_files_url = pr_url .. '/files'
   if vim.v.shell_error ~= 0 then
     vim.api.nvim_err_writeln("Failed to get PR URL. Make sure you're in a git repository with an active PR and gh CLI is installed.")
     return
   end
+  local pr_files_url = pr_url .. '/files'
 
-  -- Get full path of current file
+  -- Get relative path from the project root of current file
   local full_path = vim.fn.expand('%:p')
-  if vim.fn.filereadable(full_path) == 0 then
+  local file_path = vim.fn.trim(vim.fn.system('git ls-files --full-name -- ' .. vim.fn.shellescape(full_path)))
+  if vim.v.shell_error ~= 0 or file_path == "" then
     open_url(pr_files_url)
-    return
-  end
-
-  -- Get git root directory
-  local git_root = vim.fn.trim(vim.fn.system('git rev-parse --show-toplevel'))
-  if vim.v.shell_error ~= 0 then
-    vim.api.nvim_err_writeln("Failed to get git root directory. Make sure you're in a git repository.")
-    return
-  end
-
-  -- Get full path of current file and make it relative to git root
-  local git_root_path = git_root .. '/'
-  local file_path = full_path
-  if full_path:sub(1, #git_root_path) == git_root_path then
-    file_path = full_path:sub(#git_root_path + 1)
-  else
-    vim.api.nvim_err_writeln("Current file is not within the git repository")
     return
   end
 
