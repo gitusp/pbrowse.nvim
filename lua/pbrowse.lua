@@ -24,29 +24,34 @@ function M.browse(line1, line2, range)
     return
   end
 
+  local full_path = vim.fn.expand('%:p')
+
   vim.notify("Fetching PR URL...", vim.log.levels.INFO)
   vim.system({ 'gh', 'pr', 'view', '--json', 'url', '--jq', '.url' }, nil, function(pr_view_result)
     if pr_view_result.code ~= 0 then
-      vim.notify("Failed to get PR URL. Make sure you're in a git repository with an active PR and gh CLI is installed.", vim.log.levels.ERROR)
+      vim.schedule(function()
+        vim.notify("Failed to get PR URL. Make sure you're in a git repository with an active PR and gh CLI is installed.", vim.log.levels.ERROR)
+      end)
       return
     end
 
-    local pr_url = vim.fn.trim(pr_view_result.stdout)
+    local pr_url = pr_view_result.stdout:gsub('%s+$', '')
     local pr_files_url = pr_url .. '/files'
 
-    local full_path = vim.fn.expand('%:p')
     vim.system({ 'git', 'ls-files', '--full-name', '--', full_path }, nil, function(ls_files_result)
-      if ls_files_result.code ~= 0 then
-        open_url(pr_files_url)
-        return
-      end
+      vim.schedule(function()
+        if ls_files_result.code ~= 0 then
+          open_url(pr_files_url)
+          return
+        end
 
-      local file_path = vim.fn.trim(ls_files_result.stdout)
-      local file_hash = vim.fn.sha256(file_path)
-      local suffix = range > 0 and create_suffix(line1, line2) or ''
-      local url = pr_files_url .. '#diff-' .. file_hash .. suffix
+        local file_path = ls_files_result.stdout:gsub('%s+$', '')
+        local file_hash = vim.fn.sha256(file_path)
+        local suffix = range > 0 and create_suffix(line1, line2) or ''
+        local url = pr_files_url .. '#diff-' .. file_hash .. suffix
 
-      open_url(url)
+        open_url(url)
+      end)
     end)
   end)
 end
