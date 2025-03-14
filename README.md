@@ -24,14 +24,6 @@ For [lazy.nvim](https://github.com/folke/lazy.nvim)
 - A repository connected to GitHub
 - Active pull request for the current branch
 
-## Acknowledgements
-
-This plugin was entirely written with assistance from Claude 3.7 Sonnet. As I'm new to Vim plugin development, any corrections, suggestions, or improvements are greatly welcome!
-
-## Compatibility
-
-This plugin has only been tested on macOS. Contributions and help testing on other platforms are welcome!
-
 ## Usage
 
 In normal mode:
@@ -39,3 +31,15 @@ In normal mode:
 
 In visual mode:
 - Select text and use `:PBrowse` - Browse the selected lines
+
+## Health Check
+
+Run `:checkhealth pbrowse` to verify that all dependencies are properly installed.
+
+## Acknowledgements
+
+This plugin was entirely written with assistance from Claude 3.7 Sonnet. As I'm new to Vim plugin development, any corrections, suggestions, or improvements are greatly welcome!
+
+## Compatibility
+
+This plugin has only been tested on macOS. Contributions and help testing on other platforms are welcome!
