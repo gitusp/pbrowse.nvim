@@ -1,20 +1,67 @@
-*pbrowse.txt*  Github PR line selector
+*pbrowse.txt*  GitHub PR line browsing plugin for Neovim
 
-INTRODUCTION                                   *pbrowse*
+==============================================================================
+CONTENTS                                                   *pbrowse-contents*
 
-`PBrowse` works as `GBrowse` but for Pull requests. This plugin allows you to
-quickly open GitHub pull request pages at specific lines or selections.
+  1. Introduction............................................|pbrowse-intro|
+  2. Requirements...........................................|pbrowse-requirements|
+  3. Installation...........................................|pbrowse-installation|
+  4. Commands...............................................|pbrowse-commands|
+  5. Usage..................................................|pbrowse-usage|
+  6. Health Check...........................................|pbrowse-health|
 
-REQUIREMENTS                                   *pbrowse-requirements*
+==============================================================================
+1. INTRODUCTION                                               *pbrowse-intro*
 
-- `git`: Git version control
-- `gh`: GitHub CLI tool
+A Neovim plugin that works like `GBrowse` but specifically for GitHub Pull
+Requests. PBrowse allows you to quickly open GitHub PR pages at specific lines
+or selections directly from your editor.
+
+Features~
+
+- Navigate to specific lines in GitHub PR view
+- Support for visual selections
+- Seamless integration with GitHub workflow
+- Works with the current PR branch
+
+==============================================================================
+2. REQUIREMENTS                                        *pbrowse-requirements*
+
+- Git (https://git-scm.com/)
+- GitHub CLI (gh) (https://cli.github.com/)
 - A repository connected to GitHub
 - Active pull request for the current branch
 
-COMMANDS                                       *pbrowse-commands*
+==============================================================================
+3. INSTALLATION                                        *pbrowse-installation*
 
-:PBrowse                                       *:PBrowse*
-        Browse the content of current file or visual selection.
-        `gh` is used to get information of the current branch's PR.
-        Works in normal mode for current file or visual mode for selections.
+Using lazy.nvim (https://github.com/folke/lazy.nvim):
+>lua
+  {
+    "gitusp/pbrowse.nvim",
+    lazy = true,
+    cmd = { "PBrowse" },
+  }
+<
+
+==============================================================================
+4. COMMANDS                                              *pbrowse-commands*
+
+                                                                  *:PBrowse*
+:PBrowse               Open GitHub PR at current line or visual selection
+
+==============================================================================
+5. USAGE                                                     *pbrowse-usage*
+
+- In normal mode: `:PBrowse` opens the current file at the current line
+- In visual mode: `:PBrowse` opens the current file with the selected lines 
+  highlighted
+
+==============================================================================
+6. HEALTH CHECK                                             *pbrowse-health*
+
+Run `:checkhealth pbrowse` to verify that all dependencies are properly 
+installed.
+
+==============================================================================
+vim:tw=78:ts=8:ft=help:norl:
